@@ -12,15 +12,19 @@ th { padding: 100px; }
 tr + tr > td,
 tr + tr > th { border-top: 1px solid indigo; }
 
-#space1 {
+td.hover {
+  cursor:pointer;
+}
+
+.oImage {
   background-image: url(../img/tic_tac_toe.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-#space2 {
+.xImage {
   background-image: url(../img/tic_tac_toe.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 100%; 
+  background-position: 100%;
 }

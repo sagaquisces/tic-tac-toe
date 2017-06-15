@@ -4,14 +4,45 @@ function Space (x,y,id) {
 	this.x = x;
   this.y = y;
 	this.id = id;
+	this.markedBy = "";
+}
+
+Space.prototype.xCoordinate = function () {
+	return this.x;
+}
+
+Space.prototype.yCoordinate = function () {
+	return this.y;
+}
+
+Space.prototype.markSpace = function (player) {
+	this.markedBy = player.mark;
+}
+
+Space.prototype.makeClickable = {
+
 }
 
 function Board () {
 	this.board = [];
 }
 
+Board.prototype.makeBoard = function () {
+	var tableHtml = ""
+	tableHtml += "<tr>"
+	for (var i=0; i<this.board.length; i++) {
+
+		if (i !== 0 && i % 3 === 0 && i !== this.board.length) {
+			tableHtml += "</tr><tr>";
+		}
+		tableHtml += "<td id='" + this.board[i].id + "' class='hover'></td>";
+	}
+	tableHtml += "</tr>";
+	return tableHtml;
+}
+
 Board.prototype.findSpace = function(x,y) {
-	for (i=0; i<this.board.length; i++) {
+	for (var i=0; i<this.board.length; i++) {
     var tempX = this.board[i].x;
     var tempY = this.board[i].y;
     if (x == tempX && y == tempY) {
@@ -23,24 +54,25 @@ Board.prototype.findSpace = function(x,y) {
 
 function Player (mark) {
   this.mark = mark;
+	this.active = false;
 }
 
 Player.prototype.getMark = function() {
   return this.mark;
 }
 
-var space1 = new Space (0,0,space1);
-var space2 = new Space (0,1,space2);
-var space3 = new Space (0,2,space3);
-var space4 = new Space (1,0,space4);
-var space5 = new Space (1,1,space5);
-var space6 = new Space (1,2,space6);
-var space7 = new Space (2,0,space7);
-var space8 = new Space (2,1,space8);
-var space9 = new Space (2,2,space9);
-
-
 var myBoard = new Board();
+
+var space1 = new Space (0,0,"space1");
+var space2 = new Space (0,1,"space2");
+var space3 = new Space (0,2,"space3");
+var space4 = new Space (1,0,"space4");
+var space5 = new Space (1,1,"space5");
+var space6 = new Space (1,2,"space6");
+var space7 = new Space (2,0,"space7");
+var space8 = new Space (2,1,"space8");
+var space9 = new Space (2,2,"space9");
+
 
 myBoard.board.push(space1);
 myBoard.board.push(space2);
@@ -52,11 +84,153 @@ myBoard.board.push(space7);
 myBoard.board.push(space8);
 myBoard.board.push(space9);
 
+player_x = new Player("X");
+player_x.active = true;
+player_o = new Player("O");
 
-console.log(myBoard.findSpace(1,2));
 
 //interface logic
 
 $(document).ready(function () {
-	alert ("hi");
+
+	var boardHtml =myBoard.makeBoard();
+
+	$('table').append(boardHtml);
+
+	$("#space1").click(function() {
+		var owner = (player_x.isActive ? player_x.getMark() : player_o.getMark())
+		alert (owner);
+		alert (thisSpace);
+		alert (thisSpace.markedBy);
+  	if (space1.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space2").click(function() {
+		space2.markSpace(player_x.active ? player_x : player_o);
+		alert(space2.markedBy);
+		if (space1.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+	});
+	$("#space3").click(function() {
+		space3.markSpace(player_x.active ? player_x : player_o);
+		if (space3.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space4").click(function() {
+		space4.markSpace(player_x.active ? player_x : player_o);
+		if (space4.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).unbind('click');
+	});
+	$("#space5").click(function() {
+		space5.markSpace(player_x.active ? player_x : player_o);
+		if (space5.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space6").click(function() {
+		space6.markSpace(player_x.active ? player_x : player_o);
+		if (space6.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space7").click(function() {
+		space7.markSpace(player_x.active ? player_x : player_o);
+		if (space7.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space8").click(function() {
+		space8.markSpace(player_x.active ? player_x : player_o);
+		if (space8.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
+	$("#space9").click(function() {
+		space9.markSpace(player_x.active ? player_x : player_o);
+		if (space9.markSpace === "X") {
+			$(this).addClass("xImage")
+			player_x.active = false;
+			player_o.active = true;
+		} else {
+			$(this).addClass("oImage")
+			player_o.active = false;
+			player_x.active = true;
+		}
+		$(this).removeClass('hover');
+		$(this).unbind('click');
+
+	});
 });
