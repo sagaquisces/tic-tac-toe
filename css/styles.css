@@ -5,7 +5,7 @@ th + th { border-left: 1px solid chartreuse; }
 tr + tr { border-top: 1px solid indigo; }
 
 td,
-th { padding: 100px; }
+th { padding: 200px; }
 
 
 // IE7

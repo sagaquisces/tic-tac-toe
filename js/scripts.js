@@ -98,11 +98,8 @@ $(document).ready(function () {
 	$('table').append(boardHtml);
 
 	$("#space1").click(function() {
-		var owner = (player_x.isActive ? player_x.getMark() : player_o.getMark())
-		alert (owner);
-		alert (thisSpace);
-		alert (thisSpace.markedBy);
-  	if (space1.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -116,9 +113,8 @@ $(document).ready(function () {
 
 	});
 	$("#space2").click(function() {
-		space2.markSpace(player_x.active ? player_x : player_o);
-		alert(space2.markedBy);
-		if (space1.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -131,8 +127,8 @@ $(document).ready(function () {
 		$(this).unbind('click');
 	});
 	$("#space3").click(function() {
-		space3.markSpace(player_x.active ? player_x : player_o);
-		if (space3.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -146,8 +142,8 @@ $(document).ready(function () {
 
 	});
 	$("#space4").click(function() {
-		space4.markSpace(player_x.active ? player_x : player_o);
-		if (space4.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -159,8 +155,8 @@ $(document).ready(function () {
 		$(this).unbind('click');
 	});
 	$("#space5").click(function() {
-		space5.markSpace(player_x.active ? player_x : player_o);
-		if (space5.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -174,8 +170,8 @@ $(document).ready(function () {
 
 	});
 	$("#space6").click(function() {
-		space6.markSpace(player_x.active ? player_x : player_o);
-		if (space6.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -189,8 +185,8 @@ $(document).ready(function () {
 
 	});
 	$("#space7").click(function() {
-		space7.markSpace(player_x.active ? player_x : player_o);
-		if (space7.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -204,8 +200,8 @@ $(document).ready(function () {
 
 	});
 	$("#space8").click(function() {
-		space8.markSpace(player_x.active ? player_x : player_o);
-		if (space8.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
@@ -219,8 +215,8 @@ $(document).ready(function () {
 
 	});
 	$("#space9").click(function() {
-		space9.markSpace(player_x.active ? player_x : player_o);
-		if (space9.markSpace === "X") {
+		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
+  	if (owner === "X") {
 			$(this).addClass("xImage")
 			player_x.active = false;
 			player_o.active = true;
