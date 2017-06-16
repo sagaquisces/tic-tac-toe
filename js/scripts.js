@@ -1,4 +1,13 @@
 //business logic
+row0Array = [];
+row1Array = [];
+row2Array = [];
+col0Array = [];
+col1Array = [];
+col2Array = [];
+diagFwdArray = [];
+diagBackArray = [];
+
 
 function Space (x,y,id) {
 	this.x = x;
@@ -19,19 +28,21 @@ Space.prototype.markSpace = function (player) {
 	this.markedBy = player.mark;
 }
 
-Space.prototype.clickIt = function (owner) {
+Space.prototype.clicked = function (element) {
+	var owner = (player_x.active ? player_x.getMark() : player_o.getMark());
 	if (owner === "X") {
-		$(this.id).addClass("xImage");
-		alert(this.id);
+		$(element).addClass("xImage");
 		player_x.active = false;
 		player_o.active = true;
 	} else {
-		$(this.id).addClass("oImage")
+		$(element).addClass("oImage")
 		player_o.active = false;
 		player_x.active = true;
 	}
-	$(this.id).removeClass('hover');
-	$(this.id).unbind('click');
+	$(element).removeClass('hover');
+	$(element).unbind('click');
+
+  alert (this.xCoordinate());
 }
 
 function Board () {
@@ -74,26 +85,19 @@ Player.prototype.getMark = function() {
 
 var myBoard = new Board();
 
-var space1 = new Space (0,0,"space1");
-var space2 = new Space (0,1,"space2");
-var space3 = new Space (0,2,"space3");
-var space4 = new Space (1,0,"space4");
-var space5 = new Space (1,1,"space5");
-var space6 = new Space (1,2,"space6");
-var space7 = new Space (2,0,"space7");
-var space8 = new Space (2,1,"space8");
-var space9 = new Space (2,2,"space9");
+var tempX = 0;
+var tempY = 0;
+var tempCounter = 1;
+var tempObj={};
 
+for (var x=0; x < 3; x++) {
 
-myBoard.board.push(space1);
-myBoard.board.push(space2);
-myBoard.board.push(space3);
-myBoard.board.push(space4);
-myBoard.board.push(space5);
-myBoard.board.push(space6);
-myBoard.board.push(space7);
-myBoard.board.push(space8);
-myBoard.board.push(space9);
+	for (var y=0; y<3; y++ ) {
+		var tempObj = new Space (x,y,"space" + tempCounter);
+		myBoard.board.push(tempObj);
+		tempCounter ++;
+	}
+}
 
 player_x = new Player("X");
 player_x.active = true;
@@ -108,129 +112,57 @@ $(document).ready(function () {
 
 	$('table').append(boardHtml);
 
-	$("#space1").click(function() {
-		var ownerMark = (player_x.active ? player_x.getMark() : player_o.getMark());
-		var space = myBoard.board[0];
-		alert(ownerMark + space);
-  	space.clickIt(ownerMark);
+	var tempId = "";
+	var space = {};
 
-	});
+	for (a=0;a<myBoard.board.length;a++) {
+		space = myBoard.board[a];
+		alert(space.xCoordinate());
+	  tempId = "#" + space.id;
+		$(tempId).click(function() {
+	  	space.clicked(this);
+		});
+	}
 
-	$("#space2").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-	});
-	$("#space3").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
-	$("#space4").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).unbind('click');
-	});
-	$("#space5").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
-	$("#space6").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
-	$("#space7").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
-	$("#space8").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
-	$("#space9").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
-
-	});
+	// $("#space1").click(function() {
+	// 	var space = myBoard.board[0];
+  // 	space.clicked(this);
+	// });
+	//
+	// $("#space2").click(function() {
+	// 	var space = myBoard.board[1];
+  // 	space.clicked(this);
+	// });
+	//
+	// $("#space3").click(function() {
+	// 	var space = myBoard.board[2];
+  // 	space.clicked(this);
+	// });
+	//
+	// $("#space4").click(function() {
+	// 	var space = myBoard.board[3];
+  // 	space.clicked(this);
+	// });
+	//
+	// $("#space5").click(function() {
+	// 	var space = myBoard.board[4];
+  // 	space.clicked(this);
+	//
+	// });
+	// $("#space6").click(function() {
+	// 	var space = myBoard.board[5];
+  // 	space.clicked(this);
+	// });
+	// $("#space7").click(function() {
+	// 	var space = myBoard.board[6];
+  // 	space.clicked(this);
+	// });
+	// $("#space8").click(function() {
+	// 	var space = myBoard.board[7];
+  // 	space.clicked(this);
+	// });
+	// $("#space9").click(function() {
+	// 	var space = myBoard.board[8];
+  // 	space.clicked(this);
+	// });
 });
