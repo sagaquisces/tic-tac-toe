@@ -19,8 +19,19 @@ Space.prototype.markSpace = function (player) {
 	this.markedBy = player.mark;
 }
 
-Space.prototype.makeClickable = {
-
+Space.prototype.clickIt = function (owner) {
+	if (owner === "X") {
+		$(this.id).addClass("xImage");
+		alert(this.id);
+		player_x.active = false;
+		player_o.active = true;
+	} else {
+		$(this.id).addClass("oImage")
+		player_o.active = false;
+		player_x.active = true;
+	}
+	$(this.id).removeClass('hover');
+	$(this.id).unbind('click');
 }
 
 function Board () {
@@ -98,20 +109,13 @@ $(document).ready(function () {
 	$('table').append(boardHtml);
 
 	$("#space1").click(function() {
-		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
-  	if (owner === "X") {
-			$(this).addClass("xImage")
-			player_x.active = false;
-			player_o.active = true;
-		} else {
-			$(this).addClass("oImage")
-			player_o.active = false;
-			player_x.active = true;
-		}
-		$(this).removeClass('hover');
-		$(this).unbind('click');
+		var ownerMark = (player_x.active ? player_x.getMark() : player_o.getMark());
+		var space = myBoard.board[0];
+		alert(ownerMark + space);
+  	space.clickIt(ownerMark);
 
 	});
+
 	$("#space2").click(function() {
 		var owner = (player_x.active ? player_x.getMark() : player_o.getMark())
   	if (owner === "X") {
